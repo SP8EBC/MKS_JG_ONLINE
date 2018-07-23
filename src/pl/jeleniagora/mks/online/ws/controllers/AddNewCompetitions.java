@@ -2,6 +2,7 @@ package pl.jeleniagora.mks.online.ws.controllers;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import pl.jeleniagora.mks.types.online.CompetitionsDefinition;
