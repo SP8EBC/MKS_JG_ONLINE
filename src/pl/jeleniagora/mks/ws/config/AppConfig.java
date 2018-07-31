@@ -44,6 +44,7 @@ public class AppConfig /*implements WebMvcConfigurer */{
 		
 		HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
 		vendorAdapter.setShowSql(true);
+		
 		out.setJpaVendorAdapter(vendorAdapter);
 		
 		out.setPackagesToScan("pl.jeleniagora.types.model");
