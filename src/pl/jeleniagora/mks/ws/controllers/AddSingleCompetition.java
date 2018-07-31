@@ -1,4 +1,4 @@
-package pl.jeleniagora.mks.online.ws.controllers;
+package pl.jeleniagora.mks.ws.controllers;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

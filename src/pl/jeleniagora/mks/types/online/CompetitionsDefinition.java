@@ -9,7 +9,6 @@ import java.time.LocalDate;
  *
  */
 public class CompetitionsDefinition implements Serializable {
-
 	/**
 	 * 
 	 */

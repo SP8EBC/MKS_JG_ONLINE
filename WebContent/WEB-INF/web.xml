@@ -32,7 +32,7 @@
       </init-param>
       <init-param>
          <param-name>contextConfigLocation</param-name>
-         <param-value>pl.jeleniagora.mks.online.ws</param-value>
+         <param-value>pl.jeleniagora.mks.ws.controllers</param-value>
       </init-param>
       <load-on-startup>1</load-on-startup>
    </servlet>
