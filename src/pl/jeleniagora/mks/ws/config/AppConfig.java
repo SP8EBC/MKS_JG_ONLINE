@@ -15,6 +15,7 @@ import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import pl.jelenigora.mks.dao.CompetitionsDao;
+import pl.jelenigora.mks.dao.CompetitionsDaoInterface;
 
 
 @Configuration
@@ -24,7 +25,7 @@ import pl.jelenigora.mks.dao.CompetitionsDao;
 public class AppConfig /*implements WebMvcConfigurer */{
 
 	@Bean
-	public CompetitionsDao competitionsDao() {
+	public CompetitionsDaoInterface competitionsDao() {
 		return new CompetitionsDao();
 	}
 	
@@ -44,6 +45,7 @@ public class AppConfig /*implements WebMvcConfigurer */{
 		
 		HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
 		vendorAdapter.setShowSql(true);
+		vendorAdapter.setDatabasePlatform("org.hibernate.dialect.PostgreSQLDialect");
 		
 		out.setJpaVendorAdapter(vendorAdapter);
 		
