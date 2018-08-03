@@ -11,7 +11,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import pl.jeleniagora.mks.types.model.CompetitionsDb;
 
-@Repository
 @Component
 public class CompetitionsDao implements CompetitionsDaoInterface {
 

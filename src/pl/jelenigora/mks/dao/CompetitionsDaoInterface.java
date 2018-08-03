@@ -2,6 +2,8 @@ package pl.jelenigora.mks.dao;
 
 import java.util.Collection;
 
+import org.springframework.stereotype.Component;
+
 import pl.jeleniagora.mks.types.model.CompetitionsDb;
 
 public interface CompetitionsDaoInterface {

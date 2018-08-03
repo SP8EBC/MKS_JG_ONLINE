@@ -1,4 +1,4 @@
-package pl.jeleniagora.mks.ws.controllers;
+package pl.jeleniagora.mks.ws.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -12,7 +12,13 @@ public class Test {
 //	@Autowired
 //	CompetitionsDao dao;
 	
-	@Autowired
-	@Qualifier("competitionsDao")
-	CompetitionsDao dao1;
+//	@Autowired
+//	@Qualifier("competitionsDao")
+//	public CompetitionsDao dao1;
+	
+//	@Autowired
+//	@Qualifier("CompetitionsDao")
+//	public void setCompetitionsDao(CompetitionsDao CompetitionsDao) {
+//		dao1 = CompetitionsDao;
+//	}
 }

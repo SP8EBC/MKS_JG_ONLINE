@@ -16,12 +16,11 @@ import pl.jelenigora.mks.dao.CompetitionsDao;
 import pl.jelenigora.mks.dao.CompetitionsDaoInterface;
 
 @RestController
-@Component
 public class AddNewCompetitions {
 	
 	@Autowired
 	@Qualifier("competitionsDao")
-	CompetitionsDaoInterface dao;
+	public CompetitionsDaoInterface dao;
 	
 	@RequestMapping(value = "/addComps", method=RequestMethod.POST, produces = "application/json;charset=UTF-8")
 	public ResponseEntity<?> add(@RequestBody CompetitionsDefinition def) {

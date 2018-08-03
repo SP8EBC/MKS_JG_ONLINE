@@ -20,12 +20,11 @@ import pl.jelenigora.mks.dao.CompetitionsDaoInterface;
 
 @Configuration
 @EnableWebMvc
-@ComponentScan("pl.jeleniagora.mks.dao, +"
-		+ "pl.jeleniagora.mks.types.model")
+@ComponentScan("pl.jeleniagora.mks")
 public class AppConfig /*implements WebMvcConfigurer */{
 
 	@Bean
-	public CompetitionsDaoInterface competitionsDao() {
+	public CompetitionsDao competitionsDao() {
 		return new CompetitionsDao();
 	}
 	
