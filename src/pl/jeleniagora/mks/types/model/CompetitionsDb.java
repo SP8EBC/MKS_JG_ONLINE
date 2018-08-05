@@ -2,12 +2,15 @@ package pl.jeleniagora.mks.types.model;
 
 import java.time.LocalDate;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 import pl.jeleniagora.mks.types.online.CompetitionsDefinition;
 
 @Entity
+@Table(name = "competitions")
 public class CompetitionsDb {
 	
 	@Id
@@ -57,6 +60,7 @@ public class CompetitionsDb {
 	/**
 	 * Liczba konkurencji
 	 */
+	@Column(name="compCount")
 	public int compCount;
 	
 	public static CompetitionsDb fromCompetitionsDef(CompetitionsDefinition def) {

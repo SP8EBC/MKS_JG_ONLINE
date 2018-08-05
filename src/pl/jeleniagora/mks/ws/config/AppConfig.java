@@ -2,6 +2,9 @@ package pl.jeleniagora.mks.ws.config;
 
 import java.nio.charset.Charset;
 import java.util.Arrays;
+import java.util.HashMap;
+
+import javax.persistence.EntityManagerFactory;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -10,8 +13,11 @@ import org.springframework.dao.annotation.PersistenceExceptionTranslationPostPro
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
+import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
+import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import pl.jelenigora.mks.dao.CompetitionsDao;
@@ -20,6 +26,7 @@ import pl.jelenigora.mks.dao.CompetitionsDaoInterface;
 
 @Configuration
 @EnableWebMvc
+@EnableTransactionManagement
 @ComponentScan("pl.jeleniagora.mks")
 public class AppConfig /*implements WebMvcConfigurer */{
 
@@ -30,10 +37,17 @@ public class AppConfig /*implements WebMvcConfigurer */{
 	
 	@Bean
 	public DriverManagerDataSource dataSource() {
+		try {
+			Class.forName("org.postgresql.Driver");
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		DriverManagerDataSource out = new DriverManagerDataSource();
-		out.setUrl("postgresql://localhost/mks_jg_online");
+		out.setUrl("jdbc:postgresql://localhost:5432/mks_jg_online");
 		out.setDriverClassName("org.postgresql.Driver");
-		out.setUsername("mks_jg_online");
+		out.setUsername("mks_jg_online_user");
 		out.setPassword("supertajnehaslo:P");
 		return out;
 	}
@@ -42,18 +56,32 @@ public class AppConfig /*implements WebMvcConfigurer */{
 	LocalContainerEntityManagerFactoryBean entityManagerFactory() {
 		LocalContainerEntityManagerFactoryBean out = new LocalContainerEntityManagerFactoryBean();
 		
+		HashMap<String, String> jpaProperties = new HashMap<String, String>();
+		jpaProperties.put("hibernate.physical_naming_strategy", "org.hibernate.cfg.EJB3NamingStrategy");
+		
 		HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
 		vendorAdapter.setShowSql(true);
 		vendorAdapter.setDatabasePlatform("org.hibernate.dialect.PostgreSQLDialect");
 		
 		out.setJpaVendorAdapter(vendorAdapter);
+		out.setJpaPropertyMap(jpaProperties);
+
 		
-		out.setPackagesToScan("pl.jeleniagora.types.model");
+		out.setPackagesToScan("pl.jeleniagora.mks.types.model");
 		out.setDataSource(dataSource());
 		
 		return out;
 		
 	}
+	
+	   @Bean
+	   public PlatformTransactionManager transactionManager(
+	     EntityManagerFactory emf){
+	       JpaTransactionManager transactionManager = new JpaTransactionManager();
+	       transactionManager.setEntityManagerFactory(emf);
+	 
+	       return transactionManager;
+	   }
 	
 	@Bean
 	public PersistenceExceptionTranslationPostProcessor exceptionTranslation(){
