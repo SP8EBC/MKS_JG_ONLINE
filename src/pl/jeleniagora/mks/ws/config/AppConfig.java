@@ -20,6 +20,7 @@ import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
+import pl.jeleniagora.mks.dao.aux.MyNamingStrategy;
 import pl.jelenigora.mks.dao.CompetitionsDao;
 import pl.jelenigora.mks.dao.CompetitionsDaoInterface;
 
@@ -34,7 +35,12 @@ public class AppConfig /*implements WebMvcConfigurer */{
 	public CompetitionsDao competitionsDao() {
 		return new CompetitionsDao();
 	}
-	
+
+	@Bean
+	public MyNamingStrategy myNamingStrategy() {
+		return new MyNamingStrategy();
+	}
+
 	@Bean
 	public DriverManagerDataSource dataSource() {
 		try {
@@ -57,7 +63,7 @@ public class AppConfig /*implements WebMvcConfigurer */{
 		LocalContainerEntityManagerFactoryBean out = new LocalContainerEntityManagerFactoryBean();
 		
 		HashMap<String, String> jpaProperties = new HashMap<String, String>();
-		jpaProperties.put("hibernate.physical_naming_strategy", "org.hibernate.cfg.EJB3NamingStrategy");
+		jpaProperties.put("hibernate.physical_naming_strategy", "pl.jeleniagora.mks.dao.aux.MyNamingStrategy");
 		
 		HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
 		vendorAdapter.setShowSql(true);

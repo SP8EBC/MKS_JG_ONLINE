@@ -3,10 +3,13 @@ package pl.jeleniagora.mks.types.model;
 import java.time.LocalDate;
 
 import javax.persistence.Column;
+import javax.persistence.Convert;
+import javax.persistence.Converter;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import pl.jeleniagora.mks.dao.aux.LocalDateAttrConverter;
 import pl.jeleniagora.mks.types.online.CompetitionsDefinition;
 
 @Entity
@@ -16,16 +19,19 @@ public class CompetitionsDb {
 	@Id
 	public int id;
 	
+	@Column(name="`serialNum`")
 	public long serialNum;
 	
 	/**
 	 * Wyświetlana nazwa zawodów
 	 */
+	@Column(name="`competitionName`")
 	public String competitionName;
 	
 	/**
 	 * Wyświetlana data rozgrywania zawodów
 	 */
+	@Convert(converter=LocalDateAttrConverter.class)
 	public LocalDate date;
 	
 	/**
@@ -33,6 +39,7 @@ public class CompetitionsDb {
 	 */
 	public String location;
 	
+	@Column(name="`trackName`")
 	public String trackName;
 	
 	/**
@@ -60,7 +67,7 @@ public class CompetitionsDb {
 	/**
 	 * Liczba konkurencji
 	 */
-	@Column(name="compCount")
+	@Column(name="`compCount`")
 	public int compCount;
 	
 	public static CompetitionsDb fromCompetitionsDef(CompetitionsDefinition def) {
