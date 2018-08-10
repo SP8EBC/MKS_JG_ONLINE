@@ -9,8 +9,14 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Type;
+import org.hibernate.annotations.TypeDef;
+
+import com.vladmihalcea.hibernate.type.array.StringArrayType;
+
 @Entity
 @Table(name = "competition_data")
+@TypeDef(name = "string-array", typeClass = StringArrayType.class)
 public class CompetitionDataDb {
 
 	@Id
@@ -31,9 +37,13 @@ public class CompetitionDataDb {
 	
 	public String clubName;
 	
-	public Vector<String> trainingRunsTimesStr;
-	
-	public Vector<String> scoredRunsTimesStr;
+	@Type(type = "string-array")
+	@Column(columnDefinition="text[]")
+	public String[] trainingRunsTimesStr;
+
+	@Type(type = "string-array")
+	@Column(columnDefinition="text[]")
+	public String[] scoredRunsTimesStr;
 	
 	
 }
