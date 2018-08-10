@@ -4,19 +4,21 @@ import java.util.Vector;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "competitionData")
+@Table(name = "competition_data")
 public class CompetitionDataDb {
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY) // generowanie kolejnych wartości przerzucone na bazę danych
 	public int id;
 	
-//	@Column(name = "`competitionSerialNumber`")
 	public long competitionSerialNumber;
-	
+
 	public int competitionId;
 	
 	public String competitorName;

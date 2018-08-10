@@ -17,7 +17,16 @@ public class MyNamingStrategy implements PhysicalNamingStrategy {
 	@Override
 	public Identifier toPhysicalColumnName(Identifier arg0, JdbcEnvironment arg1) {
 		// TODO Auto-generated method stub
-		return arg0;
+		String input = arg0.toString();
+		String regexp = "(?=[A-Z])";		// regexp do łapania dużych lister alfabetu
+		String[] separated = input.split(regexp);
+		String output = new String();
+		
+		for (String s : separated) {
+			output = output.concat(s + "_");
+		}
+		
+		return Identifier.toIdentifier(output.toLowerCase().substring(0, output.length() - 1));
 	}
 
 	@Override
