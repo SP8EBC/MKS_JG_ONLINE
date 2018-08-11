@@ -10,6 +10,7 @@ public interface CompetitionsDaoInterface {
 
 	public void addCompetitions(CompetitionsDb c);
 	public Collection<CompetitionsDb> listAllCompetitions();
+	public CompetitionsDb returnCompetitionByName(String name);
 	public void deleteCompetitios(CompetitionsDb c);
 	
 }

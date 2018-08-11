@@ -6,6 +6,8 @@ import javax.persistence.Column;
 import javax.persistence.Convert;
 import javax.persistence.Converter;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -17,15 +19,16 @@ import pl.jeleniagora.mks.types.online.CompetitionsDefinition;
 public class CompetitionsDb {
 	
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY) // generowanie kolejnych wartości przerzucone na bazę danych
 	public int id;
 	
-	@Column(name="`serialNum`")
+//	@Column(name="`serialNum`")
 	public long serialNum;
 	
 	/**
 	 * Wyświetlana nazwa zawodów
 	 */
-	@Column(name="`competitionName`")
+//	@Column(name="`competitionName`")
 	public String competitionName;
 	
 	/**
@@ -39,7 +42,7 @@ public class CompetitionsDb {
 	 */
 	public String location;
 	
-	@Column(name="`trackName`")
+//	@Column(name="`trackName`")
 	public String trackName;
 	
 	/**
