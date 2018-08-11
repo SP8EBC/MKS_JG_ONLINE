@@ -24,8 +24,15 @@ public class AddNewCompetitions {
 	
 	@RequestMapping(value = "/addComps", method=RequestMethod.POST, produces = "application/json;charset=UTF-8")
 	public ResponseEntity<?> add(@RequestBody CompetitionsDefinition def) {
+		ResponseEntity<String> resp;
+		CompetitionsDb fromDb = dao.returnCompetitionByName(def.competitionsName);
+		
+		if (fromDb != null) {
+			resp = new ResponseEntity<String>(new String("ALREADY_CREATED"), HttpStatus.CONFLICT);
+			return resp;
+		}
+		resp = new ResponseEntity<String>(new String("test_ążźćłó"), HttpStatus.CREATED);
 		dao.addCompetitions(CompetitionsDb.fromCompetitionsDef(def));
-		ResponseEntity<String> resp = new ResponseEntity<String>(new String("test_ążźćłó"), HttpStatus.CREATED);
 		return resp;
 		
 	}

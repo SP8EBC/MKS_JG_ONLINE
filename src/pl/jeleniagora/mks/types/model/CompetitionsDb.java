@@ -20,7 +20,7 @@ public class CompetitionsDb {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY) // generowanie kolejnych wartości przerzucone na bazę danych
-	public int id;
+	public Integer id;
 	
 //	@Column(name="`serialNum`")
 	public long serialNum;
@@ -29,7 +29,7 @@ public class CompetitionsDb {
 	 * Wyświetlana nazwa zawodów
 	 */
 //	@Column(name="`competitionName`")
-	public String competitionName;
+	public String competitionsName;
 	
 	/**
 	 * Wyświetlana data rozgrywania zawodów
@@ -77,7 +77,7 @@ public class CompetitionsDb {
 		CompetitionsDb out = new CompetitionsDb();
 		
 		out.serialNum = def.competitionsUniqId;
-		out.competitionName = def.competitionsName;
+		out.competitionsName = def.competitionsName;
 		out.compCount = def.compCount;
 		out.date = def.competitionsDate;
 		out.judge1 = def.judge1;

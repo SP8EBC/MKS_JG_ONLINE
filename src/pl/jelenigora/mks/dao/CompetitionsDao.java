@@ -1,6 +1,8 @@
 package pl.jelenigora.mks.dao;
 
 import java.util.Collection;
+import java.util.LinkedList;
+import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -13,18 +15,22 @@ import org.springframework.transaction.annotation.Transactional;
 import pl.jeleniagora.mks.dao.repository.CompetitionsDbRepository;
 import pl.jeleniagora.mks.types.model.CompetitionsDb;
 
-@Component
+@Repository
 public class CompetitionsDao implements CompetitionsDaoInterface {
 
 	@PersistenceContext
 	EntityManager em;
 	
+	/**
+	 * Repozytorium spring-data dla łatwego budownia zapytań do bazy danych
+	 */
 	@Autowired
-	CompetitionsDbRepository repo;
+	CompetitionsDbRepository repo;	
 	
 	@Override
 	@Transactional
 	public void addCompetitions(CompetitionsDb c) {
+				
 		em.persist(c);
 
 	}
@@ -37,12 +43,16 @@ public class CompetitionsDao implements CompetitionsDaoInterface {
 	@Override
 	@Transactional
 	public void deleteCompetitios(CompetitionsDb c) {
-
+		em.remove(c);
 	}
 
 	@Override
 	public CompetitionsDb returnCompetitionByName(String name) {
-		return null;
+		List<CompetitionsDb> checkedComp = repo.findByCompetitionsName(name);
+
+		if (checkedComp != null && checkedComp.size() > 0)
+			return checkedComp.get(0);
+		else return null;
 	}
 
 }
