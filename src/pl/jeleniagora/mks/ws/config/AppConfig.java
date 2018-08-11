@@ -11,6 +11,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.data.web.config.EnableSpringDataWebSupport;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
@@ -29,6 +30,7 @@ import pl.jelenigora.mks.dao.CompetitionsDaoInterface;
 
 @Configuration
 @EnableWebMvc
+@EnableSpringDataWebSupport
 @EnableTransactionManagement
 @EnableJpaRepositories(basePackages = {"pl.jeleniagora.mks.dao.repository"})
 @ComponentScan("pl.jeleniagora.mks")
