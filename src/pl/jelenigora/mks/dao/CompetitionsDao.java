@@ -1,19 +1,18 @@
 package pl.jelenigora.mks.dao;
 
 import java.util.Collection;
-import java.util.LinkedList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import pl.jeleniagora.mks.dao.repository.CompetitionsDbRepository;
 import pl.jeleniagora.mks.types.model.CompetitionsDb;
+import pl.jeleniagora.mks.types.online.CompetitionsDefinition;
 
 @Repository
 public class CompetitionsDao implements CompetitionsDaoInterface {
@@ -29,6 +28,7 @@ public class CompetitionsDao implements CompetitionsDaoInterface {
 	
 	@Override
 	@Transactional
+	@Deprecated
 	public void addCompetitions(CompetitionsDb c) {
 				
 		em.persist(c);
@@ -42,8 +42,11 @@ public class CompetitionsDao implements CompetitionsDaoInterface {
 
 	@Override
 	@Transactional
-	public void deleteCompetitios(CompetitionsDb c) {
-		em.remove(c);
+	public void deleteCompetitions(String name) {
+		List<CompetitionsDb> checkedComp = repo.findByCompetitionsName(name);
+
+		if (checkedComp != null && checkedComp.size() > 0)
+			em.remove(checkedComp.get(0));
 	}
 
 	@Override
@@ -53,6 +56,11 @@ public class CompetitionsDao implements CompetitionsDaoInterface {
 		if (checkedComp != null && checkedComp.size() > 0)
 			return checkedComp.get(0);
 		else return null;
+	}
+
+	@Override
+	public void addCompetitions(CompetitionsDefinition c) {
+		
 	}
 
 }
