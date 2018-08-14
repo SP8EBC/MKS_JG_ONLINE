@@ -9,4 +9,5 @@ import pl.jeleniagora.mks.types.model.CompetitionsDb;
 public interface CompetitionsDbRepository extends Repository<CompetitionsDb, Integer> {
 
 	public List<CompetitionsDb> findByCompetitionsName(String name);
+
 }

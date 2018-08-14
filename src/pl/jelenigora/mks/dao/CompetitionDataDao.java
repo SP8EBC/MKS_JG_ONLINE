@@ -1,14 +1,15 @@
 package pl.jelenigora.mks.dao;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
-import org.hibernate.annotations.TypeDef;
-import org.hibernate.annotations.TypeDefs;
-import org.springframework.stereotype.Component;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import pl.jeleniagora.mks.dao.repository.CompetitionDataDbRepository;
 import pl.jeleniagora.mks.types.model.CompetitionDataDb;
 import pl.jeleniagora.mks.types.online.CompetitionData;
 import pl.jeleniagora.mks.types.online.CompetitionDataEntry;
@@ -18,6 +19,9 @@ public class CompetitionDataDao implements CompetitionDataDaoInterface {
 
 	@PersistenceContext
 	EntityManager em;
+	
+	@Autowired
+	CompetitionDataDbRepository repo;
 	
 	@Override
 	@Transactional
@@ -51,8 +55,19 @@ public class CompetitionDataDao implements CompetitionDataDaoInterface {
 	}
 
 	@Override
+	@Transactional
 	public void deleteCompetitionData(long serialNumber) {
+		List<CompetitionDataDb> q = repo.findByCompetitionSerialNumber(serialNumber);
+		
 
+		if (q != null && q.size() > 0) {
+//			em.getTransaction().begin();
+			q.forEach((CompetitionDataDb elem) -> {
+				em.remove(elem);
+			});
+			//em.getTransaction().commit();
+		}
+		
 	}
 
 	@Override
