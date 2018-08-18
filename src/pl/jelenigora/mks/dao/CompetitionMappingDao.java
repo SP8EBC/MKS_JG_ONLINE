@@ -34,6 +34,7 @@ public class CompetitionMappingDao implements CompetitionMappingDaoInterface {
 	}
 
 	@Override
+	@Transactional
 	public void addMappings(CompetitionsToCompetitionMapping mapping) {
 		mapping.entries.forEach((CompetitionsToCompetitionMappingEntry e) -> {
 			CmpsToCompetitionMappingDb db = new CmpsToCompetitionMappingDb();
@@ -41,6 +42,7 @@ public class CompetitionMappingDao implements CompetitionMappingDaoInterface {
 			db.competitionSerialNumber = e.competitionSerialNumber;
 			db.cmpsName = e.competitionsName;
 			
+			em.persist(db);
 		});
 	}
 
