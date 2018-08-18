@@ -9,8 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import pl.jeleniagora.mks.dao.repository.CompetitionsToCompetitionMappingDbRepository;
-import pl.jeleniagora.mks.types.model.CompetitionsToCompetitionMappingDb;
+import pl.jeleniagora.mks.dao.repository.CmpsToCompetitionMappingDbRepository;
+import pl.jeleniagora.mks.types.model.CmpsToCompetitionMappingDb;
 import pl.jeleniagora.mks.types.online.CompetitionsToCompetitionMapping;
 import pl.jeleniagora.mks.types.online.CompetitionsToCompetitionMappingEntry;
 
@@ -21,14 +21,14 @@ public class CompetitionMappingDao implements CompetitionMappingDaoInterface {
 	EntityManager em;
 	
 	@Autowired
-	CompetitionsToCompetitionMappingDbRepository repo;
+	CmpsToCompetitionMappingDbRepository repo;
 	
 	@Override
 	@Transactional
 	public void deleteAllMappingsForCompetitions(String name) {
-		List <CompetitionsToCompetitionMappingDb> q = repo.findByCompetitionsName(name);
+		List <CmpsToCompetitionMappingDb> q = repo.findByCmpsName(name);
 		
-		q.forEach((CompetitionsToCompetitionMappingDb e) -> {
+		q.forEach((CmpsToCompetitionMappingDb e) -> {
 			em.remove(e);
 		});
 	}
@@ -36,10 +36,10 @@ public class CompetitionMappingDao implements CompetitionMappingDaoInterface {
 	@Override
 	public void addMappings(CompetitionsToCompetitionMapping mapping) {
 		mapping.entries.forEach((CompetitionsToCompetitionMappingEntry e) -> {
-			CompetitionsToCompetitionMappingDb db = new CompetitionsToCompetitionMappingDb();
+			CmpsToCompetitionMappingDb db = new CmpsToCompetitionMappingDb();
 			
 			db.competitionSerialNumber = e.competitionSerialNumber;
-			db.competitionsName = e.competitionsName;
+			db.cmpsName = e.competitionsName;
 			
 		});
 	}

@@ -24,6 +24,7 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import pl.jeleniagora.mks.dao.aux.MyNamingStrategy;
 import pl.jelenigora.mks.dao.CompetitionDataDao;
+import pl.jelenigora.mks.dao.CompetitionMappingDao;
 import pl.jelenigora.mks.dao.CompetitionsDao;
 import pl.jelenigora.mks.dao.CompetitionsDaoInterface;
 
@@ -36,6 +37,11 @@ import pl.jelenigora.mks.dao.CompetitionsDaoInterface;
 @ComponentScan("pl.jeleniagora.mks")
 public class AppConfig /*implements WebMvcConfigurer */{
 
+	@Bean
+	public CompetitionMappingDao competitionMappingDao() {
+		return new CompetitionMappingDao();
+	}
+	
 	@Bean
 	public CompetitionDataDao competitionDataDao() {
 		return new CompetitionDataDao();

@@ -8,13 +8,13 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "competitions_to_competition_mapping")
-public class CompetitionsToCompetitionMappingDb {
+public class CmpsToCompetitionMappingDb {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY) // generowanie kolejnych wartości przerzucone na bazę danych
 	public Integer id;
 	
-	public String competitionsName;
+	public String cmpsName;
 	
 	public Long competitionSerialNumber;
 }
