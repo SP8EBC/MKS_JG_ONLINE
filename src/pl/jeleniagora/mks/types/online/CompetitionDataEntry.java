@@ -22,4 +22,5 @@ public class CompetitionDataEntry {
 	public Vector<String> trainingRunsTimesStr;
 	
 	public Vector<String> scoredRunsTimesStr;
+	
 }

@@ -17,4 +17,6 @@ public class CmpsToCompetitionMappingDb {
 	public String cmpsName;
 	
 	public Long competitionSerialNumber;
+	
+	public String competitionTypeName;
 }

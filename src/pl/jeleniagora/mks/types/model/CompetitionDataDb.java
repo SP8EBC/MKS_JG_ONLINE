@@ -46,4 +46,5 @@ public class CompetitionDataDb {
 	public String[] scoredRunsTimesStr;
 	
 	
+	
 }
