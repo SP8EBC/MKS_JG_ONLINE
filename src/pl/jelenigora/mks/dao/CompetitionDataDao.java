@@ -50,6 +50,9 @@ public class CompetitionDataDao implements CompetitionDataDaoInterface {
 			//db.scoredRunsTimesStr = en.scoredRunsTimesStr;
 			//db.trainingRunsTimesStr = en.trainingRunsTimesStr;
 			
+			db.birthYear = en.birthYear;
+			db.totalScoredTimeStr = en.totalScoredTimeStr;
+			
 			em.persist(db);
 		}
 	}

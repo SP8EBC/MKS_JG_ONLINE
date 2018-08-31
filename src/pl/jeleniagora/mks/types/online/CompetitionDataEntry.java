@@ -23,4 +23,8 @@ public class CompetitionDataEntry {
 	
 	public Vector<String> scoredRunsTimesStr;
 	
+	public String totalScoredTimeStr;
+	
+	public int birthYear;
+	
 }

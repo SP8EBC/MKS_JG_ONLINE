@@ -45,6 +45,11 @@ public class CompetitionDataDb {
 	@Column(columnDefinition="text[]")
 	public String[] scoredRunsTimesStr;
 	
+	public String totalScoredTimeStr;
+	
+	@Column(nullable = true)
+	public Integer birthYear;
+	
 	
 	
 }
