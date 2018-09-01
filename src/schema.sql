@@ -5,7 +5,7 @@
 -- Dumped from database version 9.5.14
 -- Dumped by pg_dump version 9.5.14
 
--- Started on 2018-08-28 23:50:40 CEST
+-- Started on 2018-09-01 18:47:38 CEST
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -16,8 +16,9 @@ SET check_function_bodies = false;
 SET client_min_messages = warning;
 SET row_security = off;
 
+DROP DATABASE mks_jg_online;
 --
--- TOC entry 2168 (class 1262 OID 16384)
+-- TOC entry 2162 (class 1262 OID 16384)
 -- Name: mks_jg_online; Type: DATABASE; Schema: -; Owner: mks_jg_online_user
 --
 
@@ -46,7 +47,7 @@ CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
 
 
 --
--- TOC entry 2171 (class 0 OID 0)
+-- TOC entry 2165 (class 0 OID 0)
 -- Dependencies: 1
 -- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: 
 --
@@ -74,7 +75,8 @@ CREATE TABLE public.competition_data (
     club_name text,
     training_runs_times_str text[],
     scored_runs_times_str text[],
-    competition_type_name text
+    total_scored_time_str text,
+    birth_year integer
 );
 
 
@@ -96,7 +98,7 @@ CREATE SEQUENCE public."competitionData_id_seq"
 ALTER TABLE public."competitionData_id_seq" OWNER TO mks_jg_online_user;
 
 --
--- TOC entry 2173 (class 0 OID 0)
+-- TOC entry 2167 (class 0 OID 0)
 -- Dependencies: 183
 -- Name: competitionData_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: mks_jg_online_user
 --
@@ -144,7 +146,7 @@ CREATE SEQUENCE public.competitions_id_seq
 ALTER TABLE public.competitions_id_seq OWNER TO mks_jg_online_user;
 
 --
--- TOC entry 2175 (class 0 OID 0)
+-- TOC entry 2169 (class 0 OID 0)
 -- Dependencies: 181
 -- Name: competitions_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: mks_jg_online_user
 --
@@ -160,7 +162,8 @@ ALTER SEQUENCE public.competitions_id_seq OWNED BY public.competitions.id;
 CREATE TABLE public.competitions_to_competition_mapping (
     id integer NOT NULL,
     cmps_name text,
-    competition_serial_number bigint
+    competition_serial_number bigint,
+    competition_type_name text
 );
 
 
@@ -182,7 +185,7 @@ CREATE SEQUENCE public.competitions_to_competition_mapping_id_seq
 ALTER TABLE public.competitions_to_competition_mapping_id_seq OWNER TO mks_jg_online_user;
 
 --
--- TOC entry 2177 (class 0 OID 0)
+-- TOC entry 2171 (class 0 OID 0)
 -- Dependencies: 185
 -- Name: competitions_to_competition_mapping_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: mks_jg_online_user
 --
@@ -215,73 +218,6 @@ ALTER TABLE ONLY public.competitions_to_competition_mapping ALTER COLUMN id SET 
 
 
 --
--- TOC entry 2178 (class 0 OID 0)
--- Dependencies: 183
--- Name: competitionData_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mks_jg_online_user
---
-
-SELECT pg_catalog.setval('public."competitionData_id_seq"', 34, true);
-
-
---
--- TOC entry 2160 (class 0 OID 16400)
--- Dependencies: 184
--- Data for Name: competition_data; Type: TABLE DATA; Schema: public; Owner: mks_jg_online_user
---
-
-COPY public.competition_data (id, competition_serial_number, competition_id, competitor_name, competitor_start_number, competitor_rank, competitor_partial_rank, club_name, training_runs_times_str, scored_runs_times_str, competition_type_name) FROM stdin;
-28	234343243240	0	baa Nk	1	0	0	MKS Karkonosze Sporty Zimowe	{}	{00:00,00:00:01.100,00:00,00:00}	Jedynki męskie
-29	234343243240	0	daa kz	2	0	0	MKS Karkonosze Sporty Zimowe	{}	{00:00,00:00:01.234,00:00,00:00}	Jedynki męskie
-30	7687687687680	1	Aąćż N	1	0	0	MKS Karkonosze Sporty Zimowe	{00:00}	{00:00,00:00,00:00}	Jedynki damskie
-31	7687687687680	1	Imi Nąz	2	0	0	MKS Karkonosze Sporty Zimowe	{00:00}	{00:00,00:00,00:00}	Jedynki damskie
-32	7687687687680	1	Im Naz	3	0	0	MKS Karkonosze Sporty Zimowe	{00:00}	{00:00,00:00,00:00}	Jedynki damskie
-33	7687687687680	1	ěřžšá Nazw	4	0	0	MKS Karkonosze Sporty Zimowe	{00:00}	{00:00,00:00,00:00}	Jedynki damskie
-34	7687687687680	1	Cazw Naz	5	0	0	MKS Karkonosze Sporty Zimowe	{00:00}	{00:00,00:00,00:00}	Jedynki damskie
-\.
-
-
---
--- TOC entry 2158 (class 0 OID 16389)
--- Dependencies: 182
--- Data for Name: competitions; Type: TABLE DATA; Schema: public; Owner: mks_jg_online_user
---
-
-COPY public.competitions (id, serial_num, competitions_name, date, location, track_name, logo1, logo2, judge1, judge2, judge3, organizer, comp_count) FROM stdin;
-7	0	III Memoriał Mariusza Warzyboka na Sankorolkach	2018-09-15	Karpacz	Przy zaporze na Łomnicy	./img/karpacz-tor1.jpg	\N	\N	\N	\N	\N	2
-\.
-
-
---
--- TOC entry 2179 (class 0 OID 0)
--- Dependencies: 181
--- Name: competitions_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mks_jg_online_user
---
-
-SELECT pg_catalog.setval('public.competitions_id_seq', 7, true);
-
-
---
--- TOC entry 2162 (class 0 OID 16411)
--- Dependencies: 186
--- Data for Name: competitions_to_competition_mapping; Type: TABLE DATA; Schema: public; Owner: mks_jg_online_user
---
-
-COPY public.competitions_to_competition_mapping (id, cmps_name, competition_serial_number) FROM stdin;
-4	III Memoriał Mariusza Warzyboka na Sankorolkach	7687687687680
-3	III Memoriał Mariusza Warzyboka na Sankorolkach	234343243240
-\.
-
-
---
--- TOC entry 2180 (class 0 OID 0)
--- Dependencies: 185
--- Name: competitions_to_competition_mapping_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mks_jg_online_user
---
-
-SELECT pg_catalog.setval('public.competitions_to_competition_mapping_id_seq', 4, true);
-
-
---
 -- TOC entry 2040 (class 2606 OID 16408)
 -- Name: competitionData_pkey; Type: CONSTRAINT; Schema: public; Owner: mks_jg_online_user
 --
@@ -309,7 +245,7 @@ ALTER TABLE ONLY public.competitions
 
 
 --
--- TOC entry 2170 (class 0 OID 0)
+-- TOC entry 2164 (class 0 OID 0)
 -- Dependencies: 6
 -- Name: SCHEMA public; Type: ACL; Schema: -; Owner: postgres
 --
@@ -321,7 +257,7 @@ GRANT ALL ON SCHEMA public TO PUBLIC;
 
 
 --
--- TOC entry 2172 (class 0 OID 0)
+-- TOC entry 2166 (class 0 OID 0)
 -- Dependencies: 184
 -- Name: TABLE competition_data; Type: ACL; Schema: public; Owner: mks_jg_online_user
 --
@@ -334,7 +270,7 @@ GRANT SELECT ON TABLE public.competition_data TO mks_jg_online_ro;
 
 
 --
--- TOC entry 2174 (class 0 OID 0)
+-- TOC entry 2168 (class 0 OID 0)
 -- Dependencies: 182
 -- Name: TABLE competitions; Type: ACL; Schema: public; Owner: mks_jg_online_user
 --
@@ -347,7 +283,7 @@ GRANT SELECT ON TABLE public.competitions TO mks_jg_online_ro;
 
 
 --
--- TOC entry 2176 (class 0 OID 0)
+-- TOC entry 2170 (class 0 OID 0)
 -- Dependencies: 186
 -- Name: TABLE competitions_to_competition_mapping; Type: ACL; Schema: public; Owner: mks_jg_online_user
 --
@@ -359,7 +295,7 @@ GRANT ALL ON TABLE public.competitions_to_competition_mapping TO mks_jg_online;
 GRANT SELECT ON TABLE public.competitions_to_competition_mapping TO mks_jg_online_ro;
 
 
--- Completed on 2018-08-28 23:50:41 CEST
+-- Completed on 2018-09-01 18:47:39 CEST
 
 --
 -- PostgreSQL database dump complete
