@@ -9,9 +9,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import pl.jeleniagora.mks.dao.CompetitionsDaoInterface;
 import pl.jeleniagora.mks.types.model.CompetitionsDb;
 import pl.jeleniagora.mks.types.online.CompetitionsDefinition;
-import pl.jelenigora.mks.dao.CompetitionsDaoInterface;
 
 @RestController
 public class UpdateExistingCompetitions {

@@ -1,4 +1,4 @@
-package pl.jelenigora.mks.dao;
+package pl.jeleniagora.mks.dao;
 
 import pl.jeleniagora.mks.types.online.CompetitionData;
 

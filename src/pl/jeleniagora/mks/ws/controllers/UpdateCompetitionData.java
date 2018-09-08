@@ -12,11 +12,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import pl.jeleniagora.mks.dao.CompetitionDataDao;
+import pl.jeleniagora.mks.dao.CompetitionDataDaoInterface;
 import pl.jeleniagora.mks.dao.repository.CompetitionDataDbRepository;
 import pl.jeleniagora.mks.types.model.CompetitionDataDb;
 import pl.jeleniagora.mks.types.online.CompetitionData;
-import pl.jelenigora.mks.dao.CompetitionDataDao;
-import pl.jelenigora.mks.dao.CompetitionDataDaoInterface;
 
 @RestController
 public class UpdateCompetitionData {

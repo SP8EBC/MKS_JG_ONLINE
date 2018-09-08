@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import pl.jeleniagora.mks.dao.CompetitionMappingDaoInterface;
 import pl.jeleniagora.mks.types.online.CompetitionsToCompetitionMapping;
-import pl.jelenigora.mks.dao.CompetitionMappingDaoInterface;
 
 @RestController
 public class UpdateMappings {

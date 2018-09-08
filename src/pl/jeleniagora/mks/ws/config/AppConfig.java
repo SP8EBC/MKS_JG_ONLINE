@@ -23,11 +23,11 @@ import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
+import pl.jeleniagora.mks.dao.CompetitionDataDao;
+import pl.jeleniagora.mks.dao.CompetitionMappingDao;
+import pl.jeleniagora.mks.dao.CompetitionsDao;
+import pl.jeleniagora.mks.dao.CompetitionsDaoInterface;
 import pl.jeleniagora.mks.dao.aux.MyNamingStrategy;
-import pl.jelenigora.mks.dao.CompetitionDataDao;
-import pl.jelenigora.mks.dao.CompetitionMappingDao;
-import pl.jelenigora.mks.dao.CompetitionsDao;
-import pl.jelenigora.mks.dao.CompetitionsDaoInterface;
 
 
 @Configuration
@@ -64,7 +64,6 @@ public class AppConfig /*implements WebMvcConfigurer */{
 		try {
 			Class.forName("org.postgresql.Driver");
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		

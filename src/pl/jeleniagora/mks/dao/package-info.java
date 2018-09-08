@@ -5,4 +5,4 @@
  * @author mateusz
  *
  */
-package pl.jelenigora.mks.dao;
+package pl.jeleniagora.mks.dao;
