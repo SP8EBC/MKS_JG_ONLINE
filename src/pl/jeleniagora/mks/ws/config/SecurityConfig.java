@@ -21,12 +21,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     	   http
            .csrf()
                .disable()
-           .authorizeRequests().antMatchers("/**").permitAll()
+           .authorizeRequests()
                .anyRequest().authenticated()
            .and()
-           .httpBasic()
-               .realmName("test")
-               .authenticationEntryPoint(new CustomAuthenticationEntryPoint());
+           .httpBasic();
+//               .realmName("test")
+//               .authenticationEntryPoint(new CustomAuthenticationEntryPoint());
 //    	http.authorizeRequests().anyRequest().denyAll();
     }
 }
