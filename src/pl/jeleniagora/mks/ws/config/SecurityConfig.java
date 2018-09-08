@@ -18,15 +18,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-//    	   http
-//           .csrf()
-//               .disable()
-//           .authorizeRequests().antMatchers("/**").permitAll()
-//               .anyRequest().authenticated()
-//           .and()
-//           .httpBasic()
-//               .realmName("test")
-//               .authenticationEntryPoint(new CustomAuthenticationEntryPoint());
-    	http.authorizeRequests().anyRequest().denyAll();
+    	   http
+           .csrf()
+               .disable()
+           .authorizeRequests().antMatchers("/**").permitAll()
+               .anyRequest().authenticated()
+           .and()
+           .httpBasic()
+               .realmName("test")
+               .authenticationEntryPoint(new CustomAuthenticationEntryPoint());
+//    	http.authorizeRequests().anyRequest().denyAll();
     }
 }
