@@ -41,6 +41,7 @@ public class CompetitionMappingDao implements CompetitionMappingDaoInterface {
 			
 			db.competitionSerialNumber = e.competitionSerialNumber;
 			db.cmpsName = e.competitionsName;
+			db.competitionTypeName = e.competitionTypeName;
 			
 			em.persist(db);
 		});
